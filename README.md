@@ -15,7 +15,6 @@ Official website for the **International Educational Foundation (IEF)**, a 501(c
 | Markup | HTML5 with SSI-style includes (compiled) |
 | Styling | [Tailwind CSS](https://tailwindcss.com/) (CDN) |
 | Interactivity | [Alpine.js](https://alpinejs.dev/) (CDN) |
-| Fonts | [Noto Sans](https://fonts.google.com/noto/specimen/Noto+Sans) (Latin) + [Noto Sans Tamil](https://fonts.google.com/noto/specimen/Noto+Sans+Tamil) (Tamil) — Google Fonts |
 | Build | Python compile script (`html/compile_site.py`) |
 | CI/CD | [GitHub Actions](https://github.com/features/actions) (`.github/workflows/deploy.yml`) |
 | Hosting | [Cloudflare Pages](https://pages.cloudflare.com/) |
@@ -164,7 +163,7 @@ For an out-of-band deploy, use the `deploy.sh` helper. It needs a local `.env` w
 { url: '/assets/picture-12.webp', title: 'Your English Caption' }
 
 // ta/gallery.html
-{ url: '/assets/picture-12.webp', title: 'உங்கள் தமிழ் தலைப்பு' }
+{ url: '/assets/picture-12.webp', title: 'உங்கள் தமிழ்த் தலைப்பு' }
 ```
 
 5. If the photo should also appear on the home page, add it to `photoItems` in `html/en/index.html` and `html/ta/index.html` as well.
