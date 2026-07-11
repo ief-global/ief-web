@@ -61,7 +61,11 @@
         if (!reel) return;
         const child = reel.children[idx];
         if (!child) return;
-        reel.scrollTo({ top: child.offsetTop - reel.offsetTop, behavior: 'smooth' });
+        if (reel.scrollWidth > reel.clientWidth) {
+            reel.scrollTo({ left: child.offsetLeft - reel.offsetLeft, behavior: 'smooth' });
+        } else {
+            reel.scrollTo({ top: child.offsetTop - reel.offsetTop, behavior: 'smooth' });
+        }
     },
 
     initGallery() {
@@ -214,15 +218,15 @@
                 </svg>
                 <h3 class="text-lg font-bold text-white tracking-wide">Photos</h3>            </div>
 
-            <div class="flex gap-4 h-[320px] md:h-[380px]" @mouseenter="photoPaused = true" @mouseleave="photoPaused = false">
-                <div class="flex-1 min-w-0 rounded-2xl overflow-hidden bg-black shadow-xl border border-white/10">
+            <div class="flex flex-col md:flex-row gap-4 md:h-[380px]" @mouseenter="photoPaused = true" @mouseleave="photoPaused = false">
+                <div class="w-full aspect-video md:aspect-auto md:flex-1 md:min-w-0 rounded-2xl overflow-hidden bg-black shadow-xl border border-white/10">
                     <img :src="activePhoto.url" class="w-full h-full object-cover transition-all duration-500" alt="IEF community photo">
                 </div>
                 <div x-ref="photoReel"
-                     class="gallery-reel w-[110px] md:w-[140px] flex-none flex flex-col overflow-y-auto gap-2 pr-1 snap-y snap-mandatory cursor-grab active:cursor-grabbing">
+                     class="gallery-reel w-full md:w-[140px] flex-none flex flex-row md:flex-col overflow-x-auto overflow-y-hidden md:overflow-x-hidden md:overflow-y-auto gap-2 pb-1 md:pb-0 md:pr-1 snap-x md:snap-y snap-mandatory cursor-grab active:cursor-grabbing">
                     <template x-for="item in photoItems" :key="item.url">
                         <button type="button" @click="photoIndex = photoItems.indexOf(item); activePhoto = item"
-                                class="flex-none w-full aspect-video rounded-xl overflow-hidden border-2 transition-all snap-start focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                class="flex-none w-32 md:w-full aspect-video rounded-xl overflow-hidden border-2 transition-all snap-start focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 :class="activePhoto.url === item.url ? 'border-blue-500 scale-95' : 'border-transparent opacity-60 hover:opacity-100'">
                             <img :src="item.url" class="w-full h-full object-cover" alt="IEF community photo" loading="lazy">
                         </button>
@@ -239,8 +243,8 @@
                 </svg>
                 <h3 class="text-lg font-bold text-white tracking-wide">Videos</h3>            </div>
 
-            <div class="flex gap-4 h-[320px] md:h-[380px]" @mouseenter="videoPaused = true" @mouseleave="videoPaused = false">
-                <div class="flex-1 min-w-0 rounded-2xl overflow-hidden bg-black shadow-xl border border-white/10">
+            <div class="flex flex-col md:flex-row gap-4 md:h-[380px]" @mouseenter="videoPaused = true" @mouseleave="videoPaused = false">
+                <div class="w-full aspect-video md:aspect-auto md:flex-1 md:min-w-0 rounded-2xl overflow-hidden bg-black shadow-xl border border-white/10">
                     <iframe class="w-full h-full"
                         :src="'https://www.youtube-nocookie.com/embed/' + activeVideo.url + '?rel=0&modestbranding=1'"
                         :title="activeVideo.title"
@@ -248,10 +252,10 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
                 </div>
-                <div x-ref="videoReel" class="gallery-reel w-[110px] md:w-[140px] flex-none flex flex-col overflow-y-auto gap-2 pr-1 snap-y snap-mandatory cursor-grab active:cursor-grabbing">
+                <div x-ref="videoReel" class="gallery-reel w-full md:w-[140px] flex-none flex flex-row md:flex-col overflow-x-auto overflow-y-hidden md:overflow-x-hidden md:overflow-y-auto gap-2 pb-1 md:pb-0 md:pr-1 snap-x md:snap-y snap-mandatory cursor-grab active:cursor-grabbing">
                     <template x-for="item in videoItems" :key="item.url">
                         <button type="button" @click="videoIndex = videoItems.indexOf(item); activeVideo = item; videoLocked = true"
-                                class="flex-none w-full aspect-video rounded-xl overflow-hidden border-2 transition-all snap-start focus:outline-none focus:ring-2 focus:ring-blue-500 relative"
+                                class="flex-none w-32 md:w-full aspect-video rounded-xl overflow-hidden border-2 transition-all snap-start focus:outline-none focus:ring-2 focus:ring-blue-500 relative"
                                 :class="activeVideo.url === item.url ? 'border-blue-500 scale-95' : 'border-transparent opacity-60 hover:opacity-100'">
                             <img :src="'https://img.youtube.com/vi/' + item.url + '/mqdefault.jpg'"
                                  class="w-full h-full object-cover" :alt="item.title" loading="lazy">
