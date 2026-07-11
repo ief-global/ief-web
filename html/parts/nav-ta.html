@@ -1,7 +1,8 @@
-<nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+<nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200"
+     x-data="{ menuOpen: false }" @click.away="menuOpen = false" @keydown.escape.window="menuOpen = false">
     <div class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
-        <a href="/ta" class="flex items-center gap-2 group">
-            <img src="/assets/logo.webp" alt="IEF Logo" class="h-10 w-auto transition-transform group-hover:scale-105">
+        <a href="/ta" class="flex items-center gap-2 group min-w-0">
+            <img src="/assets/logo.webp" alt="IEF Logo" class="h-10 w-auto flex-none transition-transform group-hover:scale-105">
             <span class="text-sm md:text-base font-bold tracking-tight text-blue-900">தாய்மொழியில் கல்வி</span>
         </a>
 
@@ -41,11 +42,37 @@
                class="text-sm font-bold hover:text-blue-600 border-b-2 pb-1 transition-colors duration-200">தொடர்புக்கு</a>
         </div>
 
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-3 md:gap-6 flex-none">
             <button @click="showDonate = true" class="bg-blue-600 text-white px-5 py-2 rounded-full font-bold text-sm hover:shadow-lg hover:bg-blue-700 transition transform hover:-translate-y-0.5">
                 நன்கொடை
             </button>
             <a href="/en" class="text-sm font-bold text-blue-600 hover:text-blue-800 transition">English</a>
+            <!-- Hamburger — mobile only; desktop nav links are untouched -->
+            <button @click="menuOpen = !menuOpen" type="button"
+                    class="md:hidden p-2 -mr-2 text-slate-700 hover:text-blue-600 transition"
+                    :aria-expanded="menuOpen" aria-controls="mobile-menu" aria-label="பிரிவுகள் பட்டியலைத் திற">
+                <svg x-show="!menuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg x-show="menuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
         </div>
+    </div>
+
+    <!-- Mobile section menu (md:hidden) -->
+    <div id="mobile-menu" x-show="menuOpen" x-cloak
+         x-transition:enter="transition ease-out duration-150"
+         x-transition:enter-start="opacity-0 -translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-100"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-2"
+         class="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur-md px-6 py-3">
+        <a @click="menuOpen = false" href="/ta/index.html" class="block py-2.5 text-sm font-bold text-slate-700 hover:text-blue-600 transition">முகப்பு</a>
+        <a @click="menuOpen = false" href="/ta/index.html#mission" class="block py-2.5 text-sm font-bold text-slate-700 hover:text-blue-600 transition">குறிக்கோள்</a>
+        <a @click="menuOpen = false" href="/ta/gallery.html" class="block py-2.5 text-sm font-bold text-slate-700 hover:text-blue-600 transition">படங்கள்</a>
+        <a @click="menuOpen = false" href="/ta/index.html#contact" class="block py-2.5 text-sm font-bold text-slate-700 hover:text-blue-600 transition">தொடர்புக்கு</a>
     </div>
 </nav>
