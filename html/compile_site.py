@@ -3,6 +3,7 @@ import os
 import re
 import json
 import shutil
+import urllib.parse
 
 # Explicit paths mapping across your NVMe SSD and 1TB HDD storage
 source_dir = os.path.dirname(os.path.abspath(__file__))
@@ -76,39 +77,42 @@ def process_file(file_path):
 schools_data_path = os.path.join(source_dir, "data", "schools.json")
 
 SCHOOL_LABELS = {
-    "en": {"est": "Est.", "students": "Students", "staff": "Staff", "chairman": "Chairman", "donate": "Donate"},
-    "ta": {"est": "தொடக்கம்", "students": "மாணவர்கள்", "staff": "பணியாளர்கள்", "chairman": "தாளாளர்", "donate": "நன்கொடை"},
+    "en": {"est": "Est.", "students": "Students", "staff": "Staff", "chairman": "Chairman", "donate": "Donate", "map": "Map"},
+    "ta": {"est": "தொடக்கம்", "students": "மாணவர்கள்", "staff": "பணியாளர்கள்", "chairman": "தாளாளர்", "donate": "நன்கொடை", "map": "வரைபடம்"},
 }
 
 SCHOOL_CARD_TEMPLATE = """
-        <article class="group relative flex-none w-[19rem] sm:w-[21rem] snap-start rounded-3xl overflow-hidden bg-slate-900 border border-white/10 shadow-xl flex flex-col">
-          <div class="relative h-36 overflow-hidden hero-gradient">
+        <article class="group relative flex flex-col md:flex-row rounded-3xl overflow-hidden bg-slate-800 ring-1 ring-white/10 shadow-xl hover:ring-blue-400/40 hover:shadow-2xl transition duration-300">
+          <!-- Media: top on mobile, left on desktop; bleeds into the card body -->
+          <div class="relative md:w-2/5 lg:w-[44%] flex-none h-52 md:h-auto md:min-h-[16rem] overflow-hidden hero-gradient">
             <div class="absolute inset-0 flex items-center justify-center">
-              <svg class="w-14 h-14 text-white/20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3 1 8.5l11 5.5 9-4.5V17h2V8.5L12 3zM5 13.18v3.32L12 20l7-3.5v-3.32l-7 3.5-7-3.5z"/></svg>
+              <svg class="w-16 h-16 text-white/20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3 1 8.5l11 5.5 9-4.5V17h2V8.5L12 3zM5 13.18v3.32L12 20l7-3.5v-3.32l-7 3.5-7-3.5z"/></svg>
             </div>
             {{#has_photo}}<img src="{{photo}}" alt="{{name}} — {{place}}" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700">{{/has_photo}}
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-            {{#year_started}}<span class="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-widest bg-blue-500/90 text-white rounded-full px-2.5 py-1">{{est_label}} {{year_started}}</span>{{/year_started}}
+            <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-800 via-slate-800/30 to-transparent"></div>
+            {{#year_started}}<span class="absolute top-4 left-4 text-[11px] font-bold uppercase tracking-widest bg-amber-400 text-slate-950 rounded-full px-3 py-1 shadow-lg">{{est_label}} {{year_started}}</span>{{/year_started}}
           </div>
-          <div class="relative flex flex-col flex-1 p-5">
-            <h3 class="text-base font-black leading-snug text-white mb-1">{{name}}</h3>
-            <p class="text-sm text-blue-300 font-semibold mb-3 flex items-start gap-1">
-              <svg class="w-3.5 h-3.5 mt-0.5 flex-none" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-              <span>{{place}}</span></p>
-            {{#students_total}}<div class="flex gap-2 mb-3">
-              <span class="flex-1 bg-white/5 rounded-lg px-2 py-1.5 text-center"><span class="block text-sm font-black text-white">{{students_total}}</span><span class="text-[10px] uppercase tracking-wide text-slate-400">{{students_label}}</span></span>
-              <span class="flex-1 bg-white/5 rounded-lg px-2 py-1.5 text-center"><span class="block text-sm font-black text-white">{{staff_total}}</span><span class="text-[10px] uppercase tracking-wide text-slate-400">{{staff_label}}</span></span>
+          <!-- Body -->
+          <div class="relative flex flex-col flex-1 p-6 md:p-7">
+            <h3 class="text-lg md:text-xl font-black leading-snug text-white mb-2">{{name}}</h3>
+            <a href="{{map_url}}" target="_blank" rel="noopener" class="inline-flex items-start gap-1.5 w-fit text-sm text-blue-300 hover:text-blue-200 font-semibold mb-4 transition">
+              <svg class="w-4 h-4 mt-0.5 flex-none" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+              <span>{{place}}<span class="text-amber-300/90 font-bold"> · {{map_label}} &#8599;</span></span></a>
+            {{#students_total}}<div class="flex gap-3 mb-4">
+              <div class="flex items-baseline gap-1.5 bg-white/5 rounded-xl px-3 py-2"><span class="text-lg font-black text-white">{{students_total}}</span><span class="text-[11px] uppercase tracking-wide text-blue-200/80">{{students_label}}</span></div>
+              <div class="flex items-baseline gap-1.5 bg-white/5 rounded-xl px-3 py-2"><span class="text-lg font-black text-white">{{staff_total}}</span><span class="text-[11px] uppercase tracking-wide text-blue-200/80">{{staff_label}}</span></div>
             </div>{{/students_total}}
-            <p class="text-xs text-slate-400 leading-relaxed">{{address}}</p>
-            {{#chairman}}<p class="text-[11px] text-slate-500 mt-1.5">{{chairman_label}}: {{chairman}}</p>{{/chairman}}
-            <div class="mt-auto pt-4 border-t border-white/10 flex items-center justify-between gap-3">
-              <div class="flex items-center gap-2 text-slate-400">
-                {{#social_youtube}}<a href="{{social_youtube}}" target="_blank" rel="noopener" aria-label="YouTube" class="hover:text-white transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>{{/social_youtube}}
-                {{#social_facebook}}<a href="{{social_facebook}}" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-white transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7v-3.5h3.1V9.4c0-3 1.8-4.7 4.6-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.2h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg></a>{{/social_facebook}}
-                {{#social_instagram}}<a href="{{social_instagram}}" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-white transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 5.6a4.2 4.2 0 1 0 0 8.4 4.2 4.2 0 0 0 0-8.4zm0 6.9a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.3-7.1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></a>{{/social_instagram}}
-                {{#phone}}<a href="tel:{{phone}}" aria-label="Call" class="hover:text-white transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11 11 0 0 0 3.5.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.5 1 1 0 0 1-.2 1l-2.3 2.3z"/></svg></a>{{/phone}}
+            <p class="text-xs text-slate-400 leading-relaxed max-w-prose">{{address}}</p>
+            {{#chairman}}<p class="text-xs text-slate-400 mt-2"><span class="text-slate-500">{{chairman_label}}:</span> {{chairman}}</p>{{/chairman}}
+            {{#phone}}<a href="tel:{{phone}}" class="text-xs text-slate-400 hover:text-blue-300 mt-1.5 w-fit transition">{{phone}}</a>{{/phone}}
+            <div class="mt-auto pt-5 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 text-slate-400">
+                {{#social_youtube}}<a href="{{social_youtube}}" target="_blank" rel="noopener" aria-label="YouTube" class="hover:text-red-500 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>{{/social_youtube}}
+                {{#social_facebook}}<a href="{{social_facebook}}" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-blue-500 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7v-3.5h3.1V9.4c0-3 1.8-4.7 4.6-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.2h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg></a>{{/social_facebook}}
+                {{#social_instagram}}<a href="{{social_instagram}}" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-pink-500 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 5.6a4.2 4.2 0 1 0 0 8.4 4.2 4.2 0 0 0 0-8.4zm0 6.9a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.3-7.1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></a>{{/social_instagram}}
               </div>
-              <a href="{{donate_url}}" target="_blank" rel="noopener" class="shrink-0 inline-flex items-center bg-amber-400 text-slate-950 text-xs font-black rounded-xl px-4 min-h-11 hover:bg-amber-300 active:scale-[0.98] transition shadow-lg">{{donate_label}}</a>
+              <a href="{{donate_url}}" target="_blank" rel="noopener" class="shrink-0 inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 text-sm font-black rounded-xl px-5 min-h-11 hover:bg-amber-300 active:scale-[0.98] transition shadow-lg">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.3C.4 8.6 1.7 5 5 5c2 0 3.3 1.2 4 2.3C9.7 6.2 11 5 13 5c3.3 0 4.6 3.6 3 6.7C19.5 16.1 12 21 12 21z"/></svg>{{donate_label}}</a>
             </div>
           </div>
         </article>"""
@@ -130,10 +134,15 @@ def render_school_cards(lang):
     cards = []
     for s in data["schools"]:
         photo_exists = os.path.exists(os.path.join(assets_src, "schools", s["slug"] + ".webp"))
+        # English postal address geocodes most reliably; use it for the Maps query in both languages.
+        addr_for_map = s.get("address_en") or s.get("address_ta")
+        map_url = ("https://www.google.com/maps/search/?api=1&query=" + urllib.parse.quote(addr_for_map)) if addr_for_map else None
         cards.append(_render_school_card({
             "name": s.get("name_" + lang),
             "place": s.get("place_" + lang),
             "address": s.get("address_" + lang),
+            "map_url": map_url,
+            "map_label": lab["map"],
             "year_started": s.get("year_started"),
             "students_total": s.get("students", {}).get("total"),
             "staff_total": s.get("staff", {}).get("total"),

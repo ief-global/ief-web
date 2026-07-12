@@ -66,7 +66,7 @@
       "email": null,
       "students": { "boys": null, "girls": null, "total": null },
       "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
+      "social": { "youtube": "https://www.youtube.com/@%E0%AE%AA%E0%AE%BE%E0%AE%B5%E0%AF%87%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AE%B0%E0%AF%8D%E0%AE%A4%E0%AE%AE%E0%AE%BF%E0%AE%B4%E0%AF%8D%E0%AE%B5%E0%AE%B4%E0%AE%BF%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AE%B3%E0%AF%8D%E0%AE%B3%E0%AE%BF", "facebook": "https://www.facebook.com/paaventharthamizhpalli", "instagram": null },
       "donate": { "ref": "school-kundrathur" },
       "photo": "/assets/schools/kundrathur.webp",
       "ttkp_url": "https://thaitamilkalvippani.org/kuntrathur.htm"
@@ -86,7 +86,7 @@
       "email": null,
       "students": { "boys": null, "girls": null, "total": null },
       "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
+      "social": { "youtube": null, "facebook": null, "instagram": "https://www.instagram.com/thangarajthaitamil/" },
       "donate": { "ref": "school-vallalar-nagar" },
       "photo": "/assets/schools/vallalar-nagar.webp",
       "ttkp_url": "https://thaitamilkalvippani.org/vallalar_nagar.htm"
@@ -106,7 +106,7 @@
       "email": null,
       "students": { "boys": null, "girls": null, "total": null },
       "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
+      "social": { "youtube": "https://www.youtube.com/@Thaitamilacademy", "facebook": "https://www.facebook.com/thaitamilraja.amuthan", "instagram": null },
       "donate": { "ref": "school-vadakadu" },
       "photo": "/assets/schools/vadakadu.webp",
       "ttkp_url": "https://thaitamilkalvippani.org/vadakadu.htm"
