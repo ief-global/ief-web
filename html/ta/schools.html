@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEF | எங்கள் பள்ளிகள்</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <style>
+        [x-cloak] { display: none !important; }
+        .hero-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+        body { font-family: 'Noto Sans', 'Noto Sans Tamil', sans-serif !important; }
+
+        /* Horizontal card shelf scrollbar */
+        .gallery-reel::-webkit-scrollbar { height: 6px; }
+        .gallery-reel::-webkit-scrollbar-track { background: rgba(255,255,255,0.08); border-radius: 999px; }
+        .gallery-reel::-webkit-scrollbar-thumb { background: rgba(96,165,250,0.55); border-radius: 999px; }
+        .gallery-reel::-webkit-scrollbar-thumb:hover { background: rgba(96,165,250,0.85); }
+        .gallery-reel { scrollbar-width: thin; scrollbar-color: rgba(96,165,250,0.55) rgba(255,255,255,0.08); }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-white font-sans" x-data="{ showDonate: false, lang: 'ta' }">
+
+<!--#include virtual="/parts/nav-ta.html" -->
+
+<!-- Page Header -->
+<section class="hero-gradient py-14 px-6 text-center">
+    <div class="max-w-3xl mx-auto">
+        <p class="text-blue-200 text-sm font-semibold uppercase tracking-widest mb-3">IEF பள்ளி வலையமைப்பு</p>
+        <h1 class="text-3xl md:text-5xl font-black text-white mb-4">எங்கள் பள்ளிகள்</h1>
+        <p class="text-slate-200 text-base md:text-lg leading-relaxed">
+            தமிழ்நாடு முழுவதும் உள்ள 15 தமிழ்வழிப் பள்ளிகள், குழந்தைகளுக்குத் தாய்மொழியில்
+            கல்வியை வழங்குகின்றன. ஒவ்வொரு பள்ளியையும் அறிய பக்கவாட்டில் நகர்த்திப் பாருங்கள்.
+        </p>
+    </div>
+</section>
+
+<!-- SCHOOLS — horizontal card shelf (cards generated from html/data/schools.json) -->
+<section class="py-16 bg-slate-950">
+    <div class="max-w-6xl mx-auto px-6"
+         x-data="{ scrollShelf(dir) { const el = $refs.shelf; el.scrollBy({ left: dir * Math.min(el.clientWidth * 0.85, 700), behavior: 'smooth' }); } }">
+
+        <div class="flex items-end justify-between gap-4 mb-6">
+            <div>
+                <h2 class="text-2xl font-bold text-white">பள்ளி வலையமைப்பைக் காண்க</h2>
+                <p class="text-sm text-slate-400 mt-1">15 பள்ளிகளையும் பார்க்க பக்கவாட்டில் நகர்த்தவும்.</p>
+            </div>
+            <div class="hidden md:flex gap-2">
+                <button @click="scrollShelf(-1)" aria-label="இடப்பக்கம் நகர்த்து"
+                        class="w-10 h-10 rounded-full border border-white/15 text-white/80 hover:bg-white/10 transition flex items-center justify-center">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <button @click="scrollShelf(1)" aria-label="வலப்பக்கம் நகர்த்து"
+                        class="w-10 h-10 rounded-full border border-white/15 text-white/80 hover:bg-white/10 transition flex items-center justify-center">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <div x-ref="shelf" class="gallery-reel flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-1 px-1">
+            <!--#school-cards lang="ta"-->
+        </div>
+    </div>
+</section>
+
+<!--#include virtual="/parts/donate-modal.html" -->
+<!--#include virtual="/parts/footer-ta.html" -->
+
+</body>
+</html>

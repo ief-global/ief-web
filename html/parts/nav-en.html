@@ -12,6 +12,10 @@
                     this.activeSection = '#gallery';
                     return;
                 }
+                if (window.location.pathname.includes('schools')) {
+                    this.activeSection = '#schools';
+                    return;
+                }
                 const map = { branding: '#home', stats: '#home', mission: '#mission', gallery: '#gallery', contact: '#contact' };
                 const targets = Object.keys(map)
                     .map(id => document.getElementById(id))
@@ -35,6 +39,10 @@
             <a href="/en/gallery.html"
                :class="activeSection === '#gallery' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-600'"
                class="text-sm font-bold hover:text-blue-600 border-b-2 pb-1 transition-colors duration-200">Gallery</a>
+
+            <a href="/en/schools.html"
+               :class="activeSection === '#schools' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-600'"
+               class="text-sm font-bold hover:text-blue-600 border-b-2 pb-1 transition-colors duration-200">Schools</a>
 
             <a href="/en/index.html#contact"
                :class="activeSection === '#contact' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-600'"
@@ -69,6 +77,7 @@
         <a @click="menuOpen = false" href="/en/index.html" class="block py-2.5 text-sm font-bold text-slate-700 hover:text-blue-600 transition">Home</a>
         <a @click="menuOpen = false" href="/en/index.html#mission" class="block py-2.5 text-sm font-bold text-slate-700 hover:text-blue-600 transition">Our Mission</a>
         <a @click="menuOpen = false" href="/en/gallery.html" class="block py-2.5 text-sm font-bold text-slate-700 hover:text-blue-600 transition">Gallery</a>
+        <a @click="menuOpen = false" href="/en/schools.html" class="block py-2.5 text-sm font-bold text-slate-700 hover:text-blue-600 transition">Schools</a>
         <a @click="menuOpen = false" href="/en/index.html#contact" class="block py-2.5 text-sm font-bold text-slate-700 hover:text-blue-600 transition">Contact Us</a>
     </div>
 </nav>
