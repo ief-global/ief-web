@@ -84,20 +84,20 @@ SCHOOL_LABELS = {
 SCHOOL_CARD_TEMPLATE = """
         <article class="group relative flex flex-col md:flex-row rounded-3xl overflow-hidden bg-slate-800 ring-1 ring-white/10 shadow-xl hover:ring-blue-400/40 hover:shadow-2xl transition duration-300">
           <!-- Media: top on mobile, left on desktop; bleeds into the card body -->
-          <div class="relative md:w-2/5 lg:w-[44%] flex-none h-52 md:h-auto md:min-h-[16rem] overflow-hidden hero-gradient">
+          <div class="relative md:w-2/5 lg:w-[44%] flex-none h-44 md:h-auto md:min-h-[16rem] overflow-hidden hero-gradient">
             <div class="absolute inset-0 flex items-center justify-center">
               <svg class="w-16 h-16 text-white/20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3 1 8.5l11 5.5 9-4.5V17h2V8.5L12 3zM5 13.18v3.32L12 20l7-3.5v-3.32l-7 3.5-7-3.5z"/></svg>
             </div>
             {{#has_photo}}<img src="{{photo}}" alt="{{name}} — {{place}}" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700">{{/has_photo}}
             <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-800 via-slate-800/30 to-transparent"></div>
-            {{#year_started}}<span class="absolute top-4 left-4 text-[11px] font-bold uppercase tracking-widest bg-amber-400 text-slate-950 rounded-full px-3 py-1 shadow-lg">{{est_label}} {{year_started}}</span>{{/year_started}}
+            {{#year_started}}<span class="absolute top-4 left-4 text-[11px] font-bold uppercase tracking-widest bg-teal-400 text-slate-950 rounded-full px-3 py-1 shadow-lg">{{est_label}} {{year_started}}</span>{{/year_started}}
           </div>
           <!-- Body -->
           <div class="relative flex flex-col flex-1 p-6 md:p-7">
             <h3 class="text-lg md:text-xl font-black leading-snug text-white mb-2">{{name}}</h3>
-            <a href="{{map_url}}" target="_blank" rel="noopener" class="inline-flex items-start gap-1.5 w-fit text-sm text-blue-300 hover:text-blue-200 font-semibold mb-4 transition">
+            <a href="{{map_url}}" target="_blank" rel="noopener" title="{{place}} — {{map_label}}" class="inline-flex items-start gap-1.5 w-fit text-sm text-blue-300 hover:text-teal-300 hover:underline underline-offset-2 font-semibold mb-4 transition">
               <svg class="w-4 h-4 mt-0.5 flex-none" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-              <span>{{place}}<span class="text-amber-300/90 font-bold"> · {{map_label}} &#8599;</span></span></a>
+              <span>{{place}}</span></a>
             {{#students_total}}<div class="flex gap-3 mb-4">
               <div class="flex items-baseline gap-1.5 bg-white/5 rounded-xl px-3 py-2"><span class="text-lg font-black text-white">{{students_total}}</span><span class="text-[11px] uppercase tracking-wide text-blue-200/80">{{students_label}}</span></div>
               <div class="flex items-baseline gap-1.5 bg-white/5 rounded-xl px-3 py-2"><span class="text-lg font-black text-white">{{staff_total}}</span><span class="text-[11px] uppercase tracking-wide text-blue-200/80">{{staff_label}}</span></div>
@@ -111,7 +111,7 @@ SCHOOL_CARD_TEMPLATE = """
                 {{#social_facebook}}<a href="{{social_facebook}}" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-blue-500 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7v-3.5h3.1V9.4c0-3 1.8-4.7 4.6-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.2h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg></a>{{/social_facebook}}
                 {{#social_instagram}}<a href="{{social_instagram}}" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-pink-500 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 5.6a4.2 4.2 0 1 0 0 8.4 4.2 4.2 0 0 0 0-8.4zm0 6.9a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.3-7.1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></a>{{/social_instagram}}
               </div>
-              <a href="{{donate_url}}" target="_blank" rel="noopener" class="shrink-0 inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 text-sm font-black rounded-xl px-5 min-h-11 hover:bg-amber-300 active:scale-[0.98] transition shadow-lg">
+              <a href="{{donate_url}}" target="_blank" rel="noopener" class="shrink-0 inline-flex items-center gap-1.5 bg-teal-400 text-slate-950 text-sm font-black rounded-xl px-5 min-h-11 hover:bg-teal-300 active:scale-[0.98] transition shadow-lg">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.3C.4 8.6 1.7 5 5 5c2 0 3.3 1.2 4 2.3C9.7 6.2 11 5 13 5c3.3 0 4.6 3.6 3 6.7C19.5 16.1 12 21 12 21z"/></svg>{{donate_label}}</a>
             </div>
           </div>
