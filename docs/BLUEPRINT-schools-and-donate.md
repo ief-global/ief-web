@@ -137,7 +137,7 @@ Definition of done (Phase 2):
 
 ## 4. Modernization roadmap (approved scope)
 
-Do these as separate commits/PRs after Phases 1–2, in this order:
+Do these as separate commits/PRs after Phases 1-2, in this order:
 
 ### Phase A — Tailwind CDN → CLI (~half day, low risk)
 1. `npm init -y` + `tailwindcss` as the only devDependency; `tailwind.config.js` with
@@ -172,7 +172,7 @@ per commit; gallery first (highest churn — see memory: home reel vs gallery ar
 
 ### Phase D — Astro: evaluation only (ADR, ~half-day spike)
 Saran wants Astro considered **later in the lifecycle**. Do not migrate now. Write
-`docs/ADR-001-astro.md` after Phases A–C, answering: what Astro buys over the (by then)
+`docs/ADR-001-astro.md` after Phases A-C, answering: what Astro buys over the (by then)
 data-driven Python pipeline — content collections with schema validation (schools.json
 would get typed), built-in i18n routing, `astro:assets` image optimization, zero-JS
 default that matches this site's philosophy; what it costs — Node build chain replaces
@@ -185,7 +185,7 @@ is the right call — record that.
 
 | Work | Estimate (Claude Code session time) |
 |---|---|
-| Phase 1 Schools page (incl. scraping + images) | 1–1.5 days |
+| Phase 1 Schools page (incl. scraping + images) | 1-1.5 days |
 | Phase 2 Donate modal | 0.5 day |
 | Phase A Tailwind CLI | 0.5 day |
 | Phase B Data engine generalization | 1 day |

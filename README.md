@@ -1,6 +1,6 @@
 # IEF Global — Website
 
-Official website for the **International Educational Foundation (IEF)**, a 501(c)(3) nonprofit organization dedicated to empowering K–12 students through native-language education.
+Official website for the **International Educational Foundation (IEF)**, a 501(c)(3) nonprofit organization dedicated to empowering K-12 students through native-language education.
 
 🌐 **Live site:** [https://ief-global.org](https://ief-global.org)
 
@@ -96,7 +96,7 @@ The site is fully bilingual. Every page exists in two versions:
 
 ```bash
 # Clone the repo
-git clone https://github.com/ief-admin/ief-web.git
+git clone https://github.com/ief-global/ief-web.git
 cd ief-web
 
 # Run the SSI compile step to resolve <!--#include virtual="..."--> directives.

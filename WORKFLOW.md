@@ -7,7 +7,7 @@ missing from the repo. That rule is removed; keep this file tracked.)
 
 ## Source of truth
 
-The laptop folder `E:\COWORK\PROJECTS\IEF\WEB` is the working clone of `ief-admin/ief-web`.
+The laptop folder `E:\COWORK\PROJECTS\IEF\WEB` is the working clone of `ief-global/ief-web`.
 Both Claude environments operate on this same folder:
 
 - **Claude Code (native Windows) — PRIMARY.** Everything that touches the pipeline:
