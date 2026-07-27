@@ -77,8 +77,10 @@ def process_file(file_path):
 schools_data_path = os.path.join(source_dir, "data", "schools.json")
 
 SCHOOL_LABELS = {
-    "en": {"est": "Est.", "students": "Students", "staff": "Staff", "chairman": "Chairman", "donate": "Donate", "map": "Map"},
-    "ta": {"est": "தொடக்கம்", "students": "மாணவர்கள்", "staff": "பணியாளர்கள்", "chairman": "தாளாளர்", "donate": "நன்கொடை", "map": "வரைபடம்"},
+    "en": {"est": "Est.", "students": "Students", "staff": "Staff", "chairman": "Correspondent",
+           "map": "Map", "visit": "School page"},
+    "ta": {"est": "தொடக்கம்", "students": "மாணவர்கள்", "staff": "பணியாளர்கள்", "chairman": "பொறுப்பாளர்",
+           "map": "வரைபடம்", "visit": "பள்ளியின் பக்கம்"},
 }
 
 SCHOOL_CARD_TEMPLATE = """
@@ -89,13 +91,14 @@ SCHOOL_CARD_TEMPLATE = """
               <svg class="w-16 h-16 text-white/20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3 1 8.5l11 5.5 9-4.5V17h2V8.5L12 3zM5 13.18v3.32L12 20l7-3.5v-3.32l-7 3.5-7-3.5z"/></svg>
             </div>
             {{#has_photo}}<img src="{{photo}}" alt="{{name}} — {{place}}" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700">{{/has_photo}}
-            <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-800 via-slate-800/30 to-transparent"></div>
+            <!-- fades the photo into the card body: downward on mobile, rightward (to the text) on desktop -->
+            <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-slate-800 via-slate-800/25 to-transparent"></div>
             {{#year_started}}<span class="absolute top-4 left-4 text-[11px] font-bold uppercase tracking-widest bg-teal-400 text-slate-950 rounded-full px-3 py-1 shadow-lg">{{est_label}} {{year_started}}</span>{{/year_started}}
           </div>
           <!-- Body -->
           <div class="relative flex flex-col flex-1 p-6 md:p-7">
             <h3 class="text-lg md:text-xl font-black leading-snug text-white mb-2">{{name}}</h3>
-            <a href="{{map_url}}" target="_blank" rel="noopener" title="{{place}} — {{map_label}}" class="inline-flex items-start gap-1.5 w-fit text-sm text-blue-300 hover:text-teal-300 hover:underline underline-offset-2 font-semibold mb-4 transition">
+            <a href="{{map_url}}" target="_blank" rel="noopener" title="{{place}} — {{map_label}}" class="relative z-20 inline-flex items-start gap-1.5 w-fit text-sm text-blue-300 hover:text-teal-300 hover:underline underline-offset-2 font-semibold mb-4 transition">
               <svg class="w-4 h-4 mt-0.5 flex-none" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
               <span>{{place}}</span></a>
             {{#students_total}}<div class="flex gap-3 mb-4">
@@ -104,17 +107,18 @@ SCHOOL_CARD_TEMPLATE = """
             </div>{{/students_total}}
             <p class="text-xs text-slate-400 leading-relaxed max-w-prose">{{address}}</p>
             {{#chairman}}<p class="text-xs text-slate-400 mt-2"><span class="text-slate-500">{{chairman_label}}:</span> {{chairman}}</p>{{/chairman}}
-            {{#phone}}<a href="tel:{{phone}}" class="text-xs text-slate-400 hover:text-blue-300 mt-1.5 w-fit transition">{{phone}}</a>{{/phone}}
-            <div class="mt-auto pt-5 flex items-center justify-between gap-3">
-              <div class="flex items-center gap-3 text-slate-400">
-                {{#social_youtube}}<a href="{{social_youtube}}" target="_blank" rel="noopener" aria-label="YouTube" class="hover:text-red-500 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>{{/social_youtube}}
-                {{#social_facebook}}<a href="{{social_facebook}}" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-blue-500 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7v-3.5h3.1V9.4c0-3 1.8-4.7 4.6-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.2h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg></a>{{/social_facebook}}
-                {{#social_instagram}}<a href="{{social_instagram}}" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-pink-500 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 5.6a4.2 4.2 0 1 0 0 8.4 4.2 4.2 0 0 0 0-8.4zm0 6.9a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.3-7.1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></a>{{/social_instagram}}
+            {{#phone}}<a href="tel:{{phone}}" class="relative z-20 text-xs text-slate-400 hover:text-blue-300 mt-1.5 w-fit transition">{{phone}}</a>{{/phone}}
+            <div class="mt-auto pt-5 flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4 text-slate-400">
+                {{#social_youtube}}<a href="{{social_youtube}}" target="_blank" rel="noopener" aria-label="YouTube" class="relative z-20 hover:text-red-500 hover:scale-110 transition"><svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>{{/social_youtube}}
+                {{#social_facebook}}<a href="{{social_facebook}}" target="_blank" rel="noopener" aria-label="Facebook" class="relative z-20 hover:text-blue-500 hover:scale-110 transition"><svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7v-3.5h3.1V9.4c0-3 1.8-4.7 4.6-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.2h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg></a>{{/social_facebook}}
+                {{#social_instagram}}<a href="{{social_instagram}}" target="_blank" rel="noopener" aria-label="Instagram" class="relative z-20 hover:text-pink-500 hover:scale-110 transition"><svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 5.6a4.2 4.2 0 1 0 0 8.4 4.2 4.2 0 0 0 0-8.4zm0 6.9a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.3-7.1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></a>{{/social_instagram}}
               </div>
-              <a href="{{donate_url}}" target="_blank" rel="noopener" class="shrink-0 inline-flex items-center gap-1.5 bg-teal-400 text-slate-950 text-sm font-black rounded-xl px-5 min-h-11 hover:bg-teal-300 active:scale-[0.98] transition shadow-lg">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.3C.4 8.6 1.7 5 5 5c2 0 3.3 1.2 4 2.3C9.7 6.2 11 5 13 5c3.3 0 4.6 3.6 3 6.7C19.5 16.1 12 21 12 21z"/></svg>{{donate_label}}</a>
+              {{#ttkp_url}}<span class="shrink-0 inline-flex items-center gap-1 text-sm font-bold text-teal-300 group-hover:text-teal-200 transition">{{visit_label}} <span aria-hidden="true">&#8599;</span></span>{{/ttkp_url}}
             </div>
           </div>
+          <!-- Whole-card link to the school's own page (stretched; sits under the icon links) -->
+          {{#ttkp_url}}<a href="{{ttkp_url}}" target="_blank" rel="noopener" class="absolute inset-0 z-10" aria-label="{{name}}, {{place}} — {{visit_label}}"></a>{{/ttkp_url}}
         </article>"""
 
 def _render_school_card(fields):
@@ -129,7 +133,6 @@ def _render_school_card(fields):
 def render_school_cards(lang):
     with open(schools_data_path, encoding="utf-8") as f:
         data = json.load(f)
-    meta = data["_meta"]
     lab = SCHOOL_LABELS[lang]
     cards = []
     for s in data["schools"]:
@@ -153,9 +156,9 @@ def render_school_cards(lang):
             "social_youtube": s.get("social", {}).get("youtube"),
             "social_facebook": s.get("social", {}).get("facebook"),
             "social_instagram": s.get("social", {}).get("instagram"),
-            "donate_url": meta["shared_stripe_link"] + "?client_reference_id=" + s["donate"]["ref"],
+            "ttkp_url": s.get("ttkp_url"),
             "est_label": lab["est"], "students_label": lab["students"], "staff_label": lab["staff"],
-            "chairman_label": lab["chairman"], "donate_label": lab["donate"],
+            "chairman_label": lab["chairman"], "visit_label": lab["visit"],
         }))
     print(f"  -> Generated {len(cards)} school cards ({lang})")
     return "\n".join(cards)

@@ -40,6 +40,71 @@
     </div>
 </section>
 
+<!-- SUPPORT THE SCHOOLS — direct bank transfer to the partner trust in India (TTKP).
+     Distinct from the site-wide Donate button, which is the US 501(c)(3) route. -->
+<section class="bg-slate-950 pt-14 px-8 sm:px-6">
+    <div class="max-w-5xl mx-auto">
+        <div class="rounded-3xl bg-slate-800 ring-1 ring-teal-400/25 shadow-xl p-6 md:p-8"
+             x-data="{ copied: '', copy(text, key) { navigator.clipboard.writeText(text); this.copied = key; setTimeout(() => this.copied = '', 1500); } }">
+
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h2 class="text-xl md:text-2xl font-black text-white">பள்ளிகளுக்கு நேரடியாக நன்கொடை அளிக்க</h2>
+                <span class="text-[11px] font-bold uppercase tracking-widest bg-teal-400 text-slate-950 rounded-full px-3 py-1">இந்தியா · 80G</span>
+            </div>
+            <p class="text-sm text-slate-400 leading-relaxed mb-6 max-w-2xl">
+                இந்தியாவிலிருந்து அளிக்கும் நன்கொடைகள், இப்பள்ளிகளை நடத்தும் தாய்த்தமிழ் கல்விப்பணி
+                அறக்கட்டளைக்கு நேரடியாகச் சென்றடையும். இந்திய வரி செலுத்துவோர் 80G பிரிவின் கீழ்
+                வரி விலக்கு பெறலாம்.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <!-- Bank -->
+                <div class="rounded-2xl bg-white/5 p-5">
+                    <div class="flex items-center gap-2 mb-4 text-teal-300">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2 2 7v2h20V7L12 2zM4 11v7H2v2h20v-2h-2v-7h-2v7h-3v-7h-2v7h-3v-7H6v7H4v-7z"/></svg>
+                        <h3 class="text-sm font-bold uppercase tracking-widest">வங்கிக் கணக்கு</h3>
+                    </div>
+                    <dl class="space-y-3 text-sm">
+                        <div class="flex justify-between gap-4"><dt class="text-slate-400">கணக்கின் பெயர்</dt><dd class="font-semibold text-white text-right">THAITAMIL KALVIPPANI</dd></div>
+                        <div class="flex justify-between gap-4 items-center"><dt class="text-slate-400">கணக்கு எண்</dt>
+                            <dd class="flex items-center gap-2"><span class="font-mono font-semibold text-white">41241392383</span>
+                                <button type="button" @click="copy('41241392383', 'acc')" aria-label="கணக்கு எண்ணை நகலெடு" class="text-slate-400 hover:text-teal-300 transition">
+                                    <svg x-show="copied !== 'acc'" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
+                                    <svg x-show="copied === 'acc'" x-cloak class="w-4 h-4 text-teal-300" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+                                </button></dd></div>
+                        <div class="flex justify-between gap-4"><dt class="text-slate-400">வங்கி</dt><dd class="font-semibold text-white text-right">இந்திய அரசு வங்கி (SBI)</dd></div>
+                        <div class="flex justify-between gap-4"><dt class="text-slate-400">கிளை</dt><dd class="font-semibold text-white text-right">வீரபாண்டி, திருப்பூர்</dd></div>
+                        <div class="flex justify-between gap-4 items-center"><dt class="text-slate-400">IFSC</dt>
+                            <dd class="flex items-center gap-2"><span class="font-mono font-semibold text-white">SBIN0009314</span>
+                                <button type="button" @click="copy('SBIN0009314', 'ifsc')" aria-label="IFSC குறியீட்டை நகலெடு" class="text-slate-400 hover:text-teal-300 transition">
+                                    <svg x-show="copied !== 'ifsc'" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
+                                    <svg x-show="copied === 'ifsc'" x-cloak class="w-4 h-4 text-teal-300" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+                                </button></dd></div>
+                    </dl>
+                </div>
+
+                <!-- Tax exemption -->
+                <div class="rounded-2xl bg-white/5 p-5">
+                    <div class="flex items-center gap-2 mb-4 text-teal-300">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        <h3 class="text-sm font-bold uppercase tracking-widest">வரி விலக்குப் பெற</h3>
+                    </div>
+                    <dl class="space-y-3 text-sm">
+                        <div class="flex justify-between gap-4"><dt class="text-slate-400">பதிவுப் பெயர்</dt><dd class="font-semibold text-white text-right">THAITAMIL KALVIPPANI</dd></div>
+                        <div class="flex justify-between gap-4"><dt class="text-slate-400">PAN</dt><dd class="font-mono font-semibold text-white">AAETT3497L</dd></div>
+                        <div class="flex justify-between gap-4"><dt class="text-slate-400">80G URN</dt><dd class="font-mono font-semibold text-white text-right">AAETT3497LF20231</dd></div>
+                    </dl>
+                    <p class="text-xs text-slate-400 leading-relaxed mt-4 pt-4 border-t border-white/10">
+                        அமெரிக்காவிலிருந்து நன்கொடை அளிக்கிறீர்களா? மேலே உள்ள
+                        <button @click="showDonate = true" class="font-bold text-teal-300 hover:text-teal-200 underline underline-offset-2">நன்கொடை</button>
+                        வழியைப் பயன்படுத்துங்கள் — IEF-இன் அமெரிக்க 501(c)(3) அந்தஸ்தின் கீழ் வரி விலக்கு பெறலாம்.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- SCHOOLS — vertical list of stacked horizontal cards (generated from html/data/schools.json) -->
 <section class="py-16 bg-slate-950">
     <div class="max-w-5xl mx-auto px-8 sm:px-6">
