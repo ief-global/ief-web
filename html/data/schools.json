@@ -6,7 +6,8 @@
       "null means 'pending — Saran to provide or scrape from ttkp_url'. The generator must skip null fields, never render 'null'.",
       "Keep name_ta/address_ta as real Tamil (from TTKP sources), not transliterations. name_en values are transliterations — flag for Saran's review before launch.",
       "donate.ref is appended to the shared Stripe payment link as ?client_reference_id=<ref> for per-school attribution.",
-      "photo paths point to /assets/schools/<slug>.webp (1200px wide, ~80% quality). See .claude/skills/school-cards/SKILL.md for the image pipeline."
+      "photo paths point to /assets/schools/<slug>.webp (1200px wide, ~80% quality). See .claude/skills/school-cards/SKILL.md for the image pipeline.",
+      "name_en/chairman_en/founder_en are transliterations of the Tamil source (thaitamilkalvippani.org) — Saran to review before production."
     ],
     "shared_stripe_link": "https://donate.stripe.com/dRmbJ0fSo8i58fn4L8dby00"
   },
@@ -19,17 +20,34 @@
       "place_en": "Medavakkam, Chennai",
       "address_ta": "இராசாராம் தெரு, அரங்கநாதபுரம், மேடவாக்கம், சென்னை – 600 100",
       "address_en": "Rajaram Street, Aranganathapuram, Medavakkam, Chennai – 600 100",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
-      "donate": { "ref": "school-medavakkam" },
+      "year_started": 1991,
+      "chairman_ta": "திருமலை தமிழரசன்",
+      "chairman_en": "Thirumalai Thamizharasan",
+      "phone": "+91 98846 33725",
+      "email": "thiruvalluvarthamizhpalli@gmail.com",
+      "students": {
+        "boys": 23,
+        "girls": 25,
+        "total": 48
+      },
+      "staff": {
+        "teachers": 7,
+        "part_time": 6,
+        "support": 4,
+        "total": 17
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-medavakkam"
+      },
       "photo": "/assets/schools/medavakkam.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/medavakkam.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/medavakkam.htm",
+      "founder_ta": "தமிழ்வழிக் கல்விச்சுடர் இறை.பொற்கொடி",
+      "founder_en": "Irai Porkodi"
     },
     {
       "slug": "ambattur",
@@ -39,17 +57,34 @@
       "place_en": "Ambattur, Chennai",
       "address_ta": "1, துலுக்கானத்தம்மன் கோவில் தெரு, வெங்கடாபுரம், அம்பத்தூர், சென்னை – 600 053",
       "address_en": "1, Thulukkanathamman Koil Street, Venkatapuram, Ambattur, Chennai – 600 053",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
-      "donate": { "ref": "school-ambattur" },
+      "year_started": 1993,
+      "chairman_ta": "சிவ காளிதாசன்",
+      "chairman_en": "Siva Kalidasan",
+      "phone": "+91 92832 22988",
+      "email": "thaithamizhambatturpalli1993@gmail.com",
+      "students": {
+        "boys": 65,
+        "girls": 60,
+        "total": 125
+      },
+      "staff": {
+        "teachers": 8,
+        "part_time": 0,
+        "support": 2,
+        "total": 10
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-ambattur"
+      },
       "photo": "/assets/schools/ambattur.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/ambaththur.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/ambaththur.htm",
+      "founder_ta": "தோழர் தியாகு",
+      "founder_en": "Thozhar Thiyagu"
     },
     {
       "slug": "kundrathur",
@@ -59,17 +94,34 @@
       "place_en": "Kundrathur, Kanchipuram",
       "address_ta": "10, திருநீலகண்டர் சாலை, சேக்கிழார் நகர், குன்றத்தூர், காஞ்சிபுரம் மாவட்டம் – 600 069",
       "address_en": "10, Thiruneelakandar Road, Sekkizhar Nagar, Kundrathur, Kanchipuram District – 600 069",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": "https://www.youtube.com/@%E0%AE%AA%E0%AE%BE%E0%AE%B5%E0%AF%87%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AE%B0%E0%AF%8D%E0%AE%A4%E0%AE%AE%E0%AE%BF%E0%AE%B4%E0%AF%8D%E0%AE%B5%E0%AE%B4%E0%AE%BF%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AE%B3%E0%AF%8D%E0%AE%B3%E0%AE%BF", "facebook": "https://www.facebook.com/paaventharthamizhpalli", "instagram": null },
-      "donate": { "ref": "school-kundrathur" },
+      "year_started": 1994,
+      "chairman_ta": "புலவர் வெற்றிச்செழியன்",
+      "chairman_en": "Pulavar Vetrichezhiyan",
+      "phone": "+91 98409 77343",
+      "email": "paventharthamizhpalli@gmail.com",
+      "students": {
+        "boys": 78,
+        "girls": 89,
+        "total": 167
+      },
+      "staff": {
+        "teachers": 11,
+        "part_time": 2,
+        "support": 2,
+        "total": 15
+      },
+      "social": {
+        "youtube": "https://www.youtube.com/@%E0%AE%AA%E0%AE%BE%E0%AE%B5%E0%AF%87%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AE%B0%E0%AF%8D%E0%AE%A4%E0%AE%AE%E0%AE%BF%E0%AE%B4%E0%AF%8D%E0%AE%B5%E0%AE%B4%E0%AE%BF%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AE%B3%E0%AF%8D%E0%AE%B3%E0%AE%BF",
+        "facebook": "https://www.facebook.com/paaventharthamizhpalli",
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-kundrathur"
+      },
       "photo": "/assets/schools/kundrathur.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/kuntrathur.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/kuntrathur.htm",
+      "founder_ta": "புலவர் வெற்றிச்செழியன்",
+      "founder_en": "Pulavar Vetrichezhiyan"
     },
     {
       "slug": "vallalar-nagar",
@@ -79,17 +131,34 @@
       "place_en": "Vallalar Nagar, Tiruppur",
       "address_ta": "1/602, வள்ளலார் நகர் கிழக்கு, திருப்பூர் – 641 604",
       "address_en": "1/602, Vallalar Nagar East, Tiruppur – 641 604",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": "https://www.instagram.com/thangarajthaitamil/" },
-      "donate": { "ref": "school-vallalar-nagar" },
+      "year_started": 1995,
+      "chairman_ta": "கு.ந.தங்கராசு",
+      "chairman_en": "K. N. Thangarasu",
+      "phone": "+91 98439 44044",
+      "email": "thaitamilschool@yahoo.co.in",
+      "students": {
+        "boys": 85,
+        "girls": 105,
+        "total": 190
+      },
+      "staff": {
+        "teachers": 10,
+        "part_time": 0,
+        "support": 13,
+        "total": 23
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": "https://www.instagram.com/thangarajthaitamil/"
+      },
+      "donate": {
+        "ref": "school-vallalar-nagar"
+      },
       "photo": "/assets/schools/vallalar-nagar.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/vallalar_nagar.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/vallalar_nagar.htm",
+      "founder_ta": null,
+      "founder_en": null
     },
     {
       "slug": "vadakadu",
@@ -99,17 +168,34 @@
       "place_en": "Vadakadu, Pudukkottai",
       "address_ta": "ஆலங்குடி வட்டம், புதுக்கோட்டை மாவட்டம், வடகாடு – 622 304",
       "address_en": "Alangudi Taluk, Pudukkottai District, Vadakadu – 622 304",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": "https://www.youtube.com/@Thaitamilacademy", "facebook": "https://www.facebook.com/thaitamilraja.amuthan", "instagram": null },
-      "donate": { "ref": "school-vadakadu" },
+      "year_started": 1997,
+      "chairman_ta": "தி. இரஞ்சனி",
+      "chairman_en": "T. Ranjani",
+      "phone": "+91 90478 20900",
+      "email": "thaitamilraja2000@gmail.com",
+      "students": {
+        "boys": 39,
+        "girls": 27,
+        "total": 66
+      },
+      "staff": {
+        "teachers": 7,
+        "part_time": 0,
+        "support": 1,
+        "total": 8
+      },
+      "social": {
+        "youtube": "https://www.youtube.com/@Thaitamilacademy",
+        "facebook": "https://www.facebook.com/thaitamilraja.amuthan",
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-vadakadu"
+      },
       "photo": "/assets/schools/vadakadu.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/vadakadu.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/vadakadu.htm",
+      "founder_ta": "மு. இராசா",
+      "founder_en": "M. Rasa"
     },
     {
       "slug": "mettur",
@@ -119,17 +205,34 @@
       "place_en": "Mettur, Salem",
       "address_ta": "67/ஏ பவானி நெடுஞ்சாலை, மாதையன் குட்டை, மேட்டூர் அணை, சேலம் மாவட்டம் – 636 452",
       "address_en": "67/A Bhavani Highway, Mathaiyan Kuttai, Mettur Dam, Salem District – 636 452",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
-      "donate": { "ref": "school-mettur" },
+      "year_started": 1998,
+      "chairman_ta": "தனலட்சுமி",
+      "chairman_en": "Thanalakshmi",
+      "phone": "+91 97514 27824",
+      "email": "thaitamil@yahoo.co.in",
+      "students": {
+        "boys": 24,
+        "girls": 26,
+        "total": 50
+      },
+      "staff": {
+        "teachers": 4,
+        "part_time": 0,
+        "support": 1,
+        "total": 5
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-mettur"
+      },
       "photo": "/assets/schools/mettur.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/mettur.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/mettur.htm",
+      "founder_ta": "தா.செ. கொளத்தூர் மணி",
+      "founder_en": "Kolathur Mani"
     },
     {
       "slug": "pollachi",
@@ -139,17 +242,34 @@
       "place_en": "Pollachi, Coimbatore",
       "address_ta": "கள்ளிப்பாளையம் புதூர், மாக்கினாம்பட்டி (அஞ்சல்), பொள்ளாச்சி – 642 003",
       "address_en": "Kallipalayam Pudur, Makkinampatti (Post), Pollachi – 642 003",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
-      "donate": { "ref": "school-pollachi" },
+      "year_started": 1998,
+      "chairman_ta": "வே. பாரதி",
+      "chairman_en": "V. Bharathi",
+      "phone": "+91 98651 07107",
+      "email": "thaaithamizhpallipollachi@gmail.com",
+      "students": {
+        "boys": 28,
+        "girls": 20,
+        "total": 48
+      },
+      "staff": {
+        "teachers": 5,
+        "part_time": 0,
+        "support": 4,
+        "total": 9
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-pollachi"
+      },
       "photo": "/assets/schools/pollachi.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/pollachi.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/pollachi.htm",
+      "founder_ta": "பெரு. வேலுமணி",
+      "founder_en": "Peru. Velumani"
     },
     {
       "slug": "pallikaranai",
@@ -159,17 +279,34 @@
       "place_en": "Pallikaranai, Chennai",
       "address_ta": "1, முதல் தெரு, அஷ்டலட்சுமி அவென்யூ, பள்ளிக்கரணை, சென்னை – 600 100",
       "address_en": "1, First Street, Ashtalakshmi Avenue, Pallikaranai, Chennai – 600 100",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
-      "donate": { "ref": "school-pallikaranai" },
+      "year_started": 1999,
+      "chairman_ta": "மாந்தநேயன்",
+      "chairman_en": "Manthaneyan",
+      "phone": "+91 90031 54649",
+      "email": "pavanarschool@gmail.com",
+      "students": {
+        "boys": 31,
+        "girls": 33,
+        "total": 64
+      },
+      "staff": {
+        "teachers": 5,
+        "part_time": 4,
+        "support": 1,
+        "total": 10
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-pallikaranai"
+      },
       "photo": "/assets/schools/pallikaranai.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/pallikaranai.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/pallikaranai.htm",
+      "founder_ta": "பாவாணர் தமிழ்வழிக் கல்வி அறக்கட்டளை",
+      "founder_en": "Pavanar Tamil Medium Education Trust"
     },
     {
       "slug": "perur",
@@ -184,10 +321,25 @@
       "chairman_en": null,
       "phone": null,
       "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
-      "donate": { "ref": "school-perur" },
+      "students": {
+        "boys": null,
+        "girls": null,
+        "total": null
+      },
+      "staff": {
+        "teachers": null,
+        "part_time": null,
+        "support": null,
+        "total": null
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-perur"
+      },
       "photo": "/assets/schools/perur.webp",
       "ttkp_url": null
     },
@@ -199,17 +351,34 @@
       "place_en": "Perunjunai, Pudukkottai",
       "address_ta": "பெருஞ்சுனை ஊரகம், அன்னவாசல் வட்டம், இராசகோபாலபுரம் அ.நி, புதுக்கோட்டை – 622 101",
       "address_en": "Perunjunai Village, Annavasal Taluk, Rajagopalapuram, Pudukkottai – 622 101",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
-      "donate": { "ref": "school-perunjunai" },
+      "year_started": 2000,
+      "chairman_ta": "சு. பாபு இராஜேந்திரன்",
+      "chairman_en": "S. Babu Rajendran",
+      "phone": "+91 94420 43330",
+      "email": "mangaiacademyb@gmail.com",
+      "students": {
+        "boys": 39,
+        "girls": 46,
+        "total": 85
+      },
+      "staff": {
+        "teachers": 4,
+        "part_time": 0,
+        "support": 1,
+        "total": 5
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-perunjunai"
+      },
       "photo": "/assets/schools/perunjunai.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/perunjunai.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/perunjunai.htm",
+      "founder_ta": "பா. மங்கையர்க்கரசி",
+      "founder_en": "P. Mangaiyarkarasi"
     },
     {
       "slug": "thindivanam",
@@ -219,17 +388,34 @@
       "place_en": "Thindivanam, Villupuram",
       "address_ta": "மாரியம்மன் கோவில் தெரு வடக்கு, ரோசானை, திண்டிவனம், விழுப்புரம் மாவட்டம் – 604 001",
       "address_en": "Mariamman Koil Street North, Rosanai, Thindivanam, Villupuram District – 604 001",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
-      "donate": { "ref": "school-thindivanam" },
+      "year_started": 2000,
+      "chairman_ta": "மு. பூபால்",
+      "chairman_en": "M. Boopal",
+      "phone": "+91 94426 22970",
+      "email": "thaitamilpalli@gmail.com",
+      "students": {
+        "boys": 131,
+        "girls": 134,
+        "total": 265
+      },
+      "staff": {
+        "teachers": 11,
+        "part_time": 0,
+        "support": 9,
+        "total": 20
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-thindivanam"
+      },
       "photo": "/assets/schools/thindivanam.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/thindivanam.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/thindivanam.htm",
+      "founder_ta": "பேராசிரியர் ஏ.ஹெச். ரகுமான்",
+      "founder_en": "Prof. A. H. Rahman"
     },
     {
       "slug": "puthuppattinam",
@@ -239,17 +425,34 @@
       "place_en": "Puthuppattinam, Chengalpattu",
       "address_ta": "பாவாணர் தெரு, காந்தி நகர், விட்டிலாபுரம் சாலை, புதுப்பட்டினம் – 603 102",
       "address_en": "Pavanar Street, Gandhi Nagar, Vittilapuram Road, Puthuppattinam – 603 102",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
-      "donate": { "ref": "school-puthuppattinam" },
+      "year_started": 2000,
+      "chairman_ta": "மனோகரன்",
+      "chairman_en": "Manoharan",
+      "phone": "+91 94441 43800",
+      "email": "pavalareru19@yahoo.com",
+      "students": {
+        "boys": 18,
+        "girls": 33,
+        "total": 51
+      },
+      "staff": {
+        "teachers": 5,
+        "part_time": 0,
+        "support": 1,
+        "total": 6
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-puthuppattinam"
+      },
       "photo": "/assets/schools/puthuppattinam.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/puthuppattinam.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/puthuppattinam.htm",
+      "founder_ta": "சு. முத்து",
+      "founder_en": "S. Muthu"
     },
     {
       "slug": "sankarankovil",
@@ -259,17 +462,34 @@
       "place_en": "Sankarankovil, Tenkasi",
       "address_ta": "127, பாரதியார் 8-ம் தெரு, இலவன்குளம் ரோடு, சங்கரன்கோயில், தென்காசி மாவட்டம்",
       "address_en": "127, Bharathiyar 8th Street, Ilavankulam Road, Sankarankovil, Tenkasi District",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
-      "donate": { "ref": "school-sankarankovil" },
+      "year_started": 2000,
+      "chairman_ta": "மு.எ. சதீஷ் கனககுரு",
+      "chairman_en": "M. E. Sathish Kanagaguru",
+      "phone": "+91 90959 17522",
+      "email": "thaitamilsnk2000@gmail.com",
+      "students": {
+        "boys": 32,
+        "girls": 24,
+        "total": 56
+      },
+      "staff": {
+        "teachers": 7,
+        "part_time": 0,
+        "support": 1,
+        "total": 8
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-sankarankovil"
+      },
       "photo": "/assets/schools/sankarankovil.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/sankaran_kovil.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/sankaran_kovil.htm",
+      "founder_ta": "முனைவர் வே. சங்கர்ராம்",
+      "founder_en": "Dr. V. Sankarram"
     },
     {
       "slug": "palladam",
@@ -279,17 +499,34 @@
       "place_en": "Palladam, Tiruppur",
       "address_ta": "338/1, தெற்குப் பாளையம், மங்கலம் சாலை, பல்லடம் – 641 664",
       "address_en": "338/1, Therku Palayam, Mangalam Road, Palladam – 641 664",
-      "year_started": null,
-      "chairman_ta": null,
-      "chairman_en": null,
-      "phone": null,
-      "email": null,
-      "students": { "boys": null, "girls": null, "total": null },
-      "staff": { "teachers": null, "part_time": null, "support": null, "total": null },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
-      "donate": { "ref": "school-palladam" },
+      "year_started": 2004,
+      "chairman_ta": "நா. இராசேசுக்கண்ணா",
+      "chairman_en": "N. Rajesukanna",
+      "phone": "+91 98422 93736",
+      "email": "taaitamilpalli@gmail.com",
+      "students": {
+        "boys": 59,
+        "girls": 45,
+        "total": 104
+      },
+      "staff": {
+        "teachers": 7,
+        "part_time": 0,
+        "support": 3,
+        "total": 10
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-palladam"
+      },
       "photo": "/assets/schools/palladam.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/palladam.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/palladam.htm",
+      "founder_ta": "நா. இராசேசுக்கண்ணா",
+      "founder_en": "N. Rajesukanna"
     },
     {
       "slug": "singanur",
@@ -300,16 +537,33 @@
       "address_ta": "பொங்கலூர்ச் சாலை, சிங்கனூர், மாதப்பூர்(அ), பல்லடம்(வ), திருப்பூர் – 641 664",
       "address_en": "Pongalur Road, Singanur, Madhapur (Post), Palladam (Taluk), Tiruppur – 641 664",
       "year_started": 2012,
-      "chairman_ta": "அ. சுப்பிரமணியன் (நிறுவனர் மற்றும் தாளாளர்)",
-      "chairman_en": "A. Subramanian (Founder & Correspondent)",
+      "chairman_ta": "அ. சுப்பிரமணியன்",
+      "chairman_en": "A. Subramanian",
       "phone": "+91 99425 71195",
       "email": "correspondent@thaitamil.in",
-      "students": { "boys": 51, "girls": 18, "total": 69 },
-      "staff": { "teachers": 6, "part_time": 3, "support": 2, "total": 11 },
-      "social": { "youtube": null, "facebook": null, "instagram": null },
-      "donate": { "ref": "school-singanur" },
+      "students": {
+        "boys": 51,
+        "girls": 18,
+        "total": 69
+      },
+      "staff": {
+        "teachers": 6,
+        "part_time": 3,
+        "support": 2,
+        "total": 11
+      },
+      "social": {
+        "youtube": null,
+        "facebook": null,
+        "instagram": null
+      },
+      "donate": {
+        "ref": "school-singanur"
+      },
       "photo": "/assets/schools/singanur.webp",
-      "ttkp_url": "https://thaitamilkalvippani.org/singanur_tirupur.htm"
+      "ttkp_url": "https://thaitamilkalvippani.org/singanur_tirupur.htm",
+      "founder_ta": "அ. சுப்பிரமணியன்",
+      "founder_en": "A. Subramanian"
     }
   ]
 }
