@@ -78,8 +78,10 @@ schools_data_path = os.path.join(source_dir, "data", "schools.json")
 
 SCHOOL_LABELS = {
     "en": {"est": "Est.", "students": "Students", "staff": "Staff", "chairman": "Correspondent",
+           "founder": "Founder", "phone": "Phone", "email": "Email",
            "map": "Map", "visit": "School page"},
     "ta": {"est": "தொடக்கம்", "students": "மாணவர்கள்", "staff": "பணியாளர்கள்", "chairman": "பொறுப்பாளர்",
+           "founder": "நிறுவனர்", "phone": "அலைபேசி", "email": "மின்னஞ்சல்",
            "map": "வரைபடம்", "visit": "பள்ளியின் பக்கம்"},
 }
 
@@ -91,8 +93,8 @@ SCHOOL_CARD_TEMPLATE = """
               <svg class="w-16 h-16 text-white/20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3 1 8.5l11 5.5 9-4.5V17h2V8.5L12 3zM5 13.18v3.32L12 20l7-3.5v-3.32l-7 3.5-7-3.5z"/></svg>
             </div>
             {{#has_photo}}<img src="{{photo}}" alt="{{name}} — {{place}}" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700">{{/has_photo}}
-            <!-- fades the photo into the card body: downward on mobile, rightward (to the text) on desktop -->
-            <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-slate-800 via-slate-800/25 to-transparent"></div>
+            <!-- barely-there blend at the seam only; keeps the photo bright (see .school-photo-fade) -->
+            <div class="absolute inset-0 school-photo-fade"></div>
             {{#year_started}}<span class="absolute top-4 left-4 text-[11px] font-bold uppercase tracking-widest bg-teal-400 text-slate-950 rounded-full px-3 py-1 shadow-lg">{{est_label}} {{year_started}}</span>{{/year_started}}
           </div>
           <!-- Body -->
@@ -105,9 +107,13 @@ SCHOOL_CARD_TEMPLATE = """
               <div class="flex items-baseline gap-1.5 bg-white/5 rounded-xl px-3 py-2"><span class="text-lg font-black text-white">{{students_total}}</span><span class="text-[11px] uppercase tracking-wide text-blue-200/80">{{students_label}}</span></div>
               <div class="flex items-baseline gap-1.5 bg-white/5 rounded-xl px-3 py-2"><span class="text-lg font-black text-white">{{staff_total}}</span><span class="text-[11px] uppercase tracking-wide text-blue-200/80">{{staff_label}}</span></div>
             </div>{{/students_total}}
-            <p class="text-xs text-slate-400 leading-relaxed max-w-prose">{{address}}</p>
-            {{#chairman}}<p class="text-xs text-slate-400 mt-2"><span class="text-slate-500">{{chairman_label}}:</span> {{chairman}}</p>{{/chairman}}
-            {{#phone}}<a href="tel:{{phone}}" class="relative z-20 text-xs text-slate-400 hover:text-blue-300 mt-1.5 w-fit transition">{{phone}}</a>{{/phone}}
+            <p class="text-xs text-slate-400 leading-relaxed max-w-prose mb-2">{{address}}</p>
+            <div class="text-xs text-slate-400 space-y-1">
+              {{#founder}}<p><span class="text-slate-500">{{founder_label}}:</span> {{founder}}</p>{{/founder}}
+              {{#chairman}}<p><span class="text-slate-500">{{chairman_label}}:</span> {{chairman}}</p>{{/chairman}}
+              {{#phone}}<p><span class="text-slate-500">{{phone_label}}:</span> <a href="tel:{{phone}}" class="relative z-20 hover:text-blue-300 transition">{{phone}}</a></p>{{/phone}}
+              {{#email}}<p class="break-all"><span class="text-slate-500">{{email_label}}:</span> <a href="mailto:{{email}}" class="relative z-20 hover:text-blue-300 transition">{{email}}</a></p>{{/email}}
+            </div>
             <div class="mt-auto pt-5 flex items-center justify-between gap-4">
               <div class="flex items-center gap-4 text-slate-400">
                 {{#social_youtube}}<a href="{{social_youtube}}" target="_blank" rel="noopener" aria-label="YouTube" class="relative z-20 hover:text-red-500 hover:scale-110 transition"><svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>{{/social_youtube}}
@@ -150,7 +156,9 @@ def render_school_cards(lang):
             "students_total": s.get("students", {}).get("total"),
             "staff_total": s.get("staff", {}).get("total"),
             "phone": s.get("phone"),
+            "email": s.get("email"),
             "chairman": s.get("chairman_" + lang),
+            "founder": s.get("founder_" + lang),
             "photo": s.get("photo"),
             "has_photo": "1" if photo_exists else None,
             "social_youtube": s.get("social", {}).get("youtube"),
@@ -158,7 +166,8 @@ def render_school_cards(lang):
             "social_instagram": s.get("social", {}).get("instagram"),
             "ttkp_url": s.get("ttkp_url"),
             "est_label": lab["est"], "students_label": lab["students"], "staff_label": lab["staff"],
-            "chairman_label": lab["chairman"], "visit_label": lab["visit"],
+            "chairman_label": lab["chairman"], "founder_label": lab["founder"],
+            "phone_label": lab["phone"], "email_label": lab["email"], "visit_label": lab["visit"],
         }))
     print(f"  -> Generated {len(cards)} school cards ({lang})")
     return "\n".join(cards)

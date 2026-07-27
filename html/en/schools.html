@@ -16,6 +16,13 @@
         .hero-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
         body { font-family: 'Noto Sans', 'Noto Sans Tamil', sans-serif !important; }
 
+        /* School card: light blend where the photo meets the card body — bottom edge on
+           mobile, right edge on desktop. Keep the stop % small so the photo stays bright. */
+        .school-photo-fade { background: linear-gradient(to top, rgba(30,41,59,0.85), rgba(30,41,59,0) 22%); }
+        @media (min-width: 768px) {
+            .school-photo-fade { background: linear-gradient(to left, rgba(30,41,59,0.9), rgba(30,41,59,0) 12%); }
+        }
+
         /* Horizontal card shelf scrollbar */
         .gallery-reel::-webkit-scrollbar { height: 6px; }
         .gallery-reel::-webkit-scrollbar-track { background: rgba(255,255,255,0.08); border-radius: 999px; }
@@ -32,7 +39,6 @@
 <!-- Page Header -->
 <section class="hero-gradient py-14 px-6 text-center">
     <div class="max-w-3xl mx-auto">
-        <p class="text-blue-200 text-sm font-semibold uppercase tracking-widest mb-3">IEF Network</p>
         <h1 class="text-3xl md:text-5xl font-black text-white mb-4">Our Schools</h1>
         <p class="text-slate-200 text-base md:text-lg leading-relaxed">
             15 Thaithamizh schools across Tamil Nadu, giving children an education rooted in their
