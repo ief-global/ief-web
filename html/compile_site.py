@@ -77,11 +77,11 @@ def process_file(file_path):
 schools_data_path = os.path.join(source_dir, "data", "schools.json")
 
 SCHOOL_LABELS = {
-    "en": {"est": "Est.", "students": "Students", "staff": "Staff", "chairman": "Correspondent",
-           "founder": "Founder", "phone": "Phone", "email": "Email",
+    "en": {"est": "Est.", "students": "Students", "teachers": "Teachers", "support": "Support staff",
+           "chairman": "Correspondent", "founder": "Founder", "phone": "Phone", "email": "Email",
            "map": "Map", "visit": "School page"},
-    "ta": {"est": "தொடக்கம்", "students": "மாணவர்கள்", "staff": "பணியாளர்கள்", "chairman": "பொறுப்பாளர்",
-           "founder": "நிறுவனர்", "phone": "அலைபேசி", "email": "மின்னஞ்சல்",
+    "ta": {"est": "தொடக்கம்", "students": "மாணவர்கள்", "teachers": "ஆசிரியர்கள்", "support": "பணியாளர்கள்",
+           "chairman": "பொறுப்பாளர்", "founder": "நிறுவனர்", "phone": "அலைபேசி", "email": "மின்னஞ்சல்",
            "map": "வரைபடம்", "visit": "பள்ளியின் பக்கம்"},
 }
 
@@ -103,9 +103,10 @@ SCHOOL_CARD_TEMPLATE = """
             <a href="{{map_url}}" target="_blank" rel="noopener" title="{{place}} — {{map_label}}" class="relative z-20 inline-flex items-start gap-1.5 w-fit text-sm text-blue-300 hover:text-teal-300 hover:underline underline-offset-2 font-semibold mb-4 transition">
               <svg class="w-4 h-4 mt-0.5 flex-none" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
               <span>{{place}}</span></a>
-            {{#students_total}}<div class="flex gap-3 mb-4">
+            {{#students_total}}<div class="flex flex-wrap gap-2 md:gap-3 mb-4">
               <div class="flex items-baseline gap-1.5 bg-white/5 rounded-xl px-3 py-2"><span class="text-lg font-black text-white">{{students_total}}</span><span class="text-[11px] uppercase tracking-wide text-blue-200/80">{{students_label}}</span></div>
-              <div class="flex items-baseline gap-1.5 bg-white/5 rounded-xl px-3 py-2"><span class="text-lg font-black text-white">{{staff_total}}</span><span class="text-[11px] uppercase tracking-wide text-blue-200/80">{{staff_label}}</span></div>
+              <div class="flex items-baseline gap-1.5 bg-white/5 rounded-xl px-3 py-2"><span class="text-lg font-black text-white">{{teachers_total}}</span><span class="text-[11px] uppercase tracking-wide text-blue-200/80">{{teachers_label}}</span></div>
+              <div class="flex items-baseline gap-1.5 bg-white/5 rounded-xl px-3 py-2"><span class="text-lg font-black text-white">{{support_total}}</span><span class="text-[11px] uppercase tracking-wide text-blue-200/80">{{support_label}}</span></div>
             </div>{{/students_total}}
             <p class="text-xs text-slate-400 leading-relaxed max-w-prose mb-2">{{address}}</p>
             <div class="text-xs text-slate-400 space-y-1">
@@ -154,7 +155,9 @@ def render_school_cards(lang):
             "map_label": lab["map"],
             "year_started": s.get("year_started"),
             "students_total": s.get("students", {}).get("total"),
-            "staff_total": s.get("staff", {}).get("total"),
+            # Teachers and support staff shown separately; part_time is deliberately excluded.
+            "teachers_total": s.get("staff", {}).get("teachers"),
+            "support_total": s.get("staff", {}).get("support"),
             "phone": s.get("phone"),
             "email": s.get("email"),
             "chairman": s.get("chairman_" + lang),
@@ -165,7 +168,8 @@ def render_school_cards(lang):
             "social_facebook": s.get("social", {}).get("facebook"),
             "social_instagram": s.get("social", {}).get("instagram"),
             "ttkp_url": s.get("ttkp_url"),
-            "est_label": lab["est"], "students_label": lab["students"], "staff_label": lab["staff"],
+            "est_label": lab["est"], "students_label": lab["students"],
+            "teachers_label": lab["teachers"], "support_label": lab["support"],
             "chairman_label": lab["chairman"], "founder_label": lab["founder"],
             "phone_label": lab["phone"], "email_label": lab["email"], "visit_label": lab["visit"],
         }))
